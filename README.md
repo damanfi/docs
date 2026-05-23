@@ -61,6 +61,10 @@ Three tiers, in basis points of self-reported AUM, posted as USDC bond before th
 
 Slash cap: 25% of currently-posted bond per dispute. Lockup: leader-determined per deployment; the vanilla impl uses 7 days.
 
+## Substrate consumption
+
+Daman declares conformance to substrate interfaces published in `reverbprotocol/protocol`. Six surfaces are consumed at the substrate layer: `IBountyAccrual` for routing a slice of slashed bond to the watchdog that filed the upheld claim; `IReputationRegistry` for cumulative scoring per agent address; `ICCTPReceiver` for CCTP v2 burn-and-mint reception; `IBondYieldVault` for USYC Teller routing on idle bond capital; `IStableFXSwap` for atomic StableFX EURC-to-USDC settlement on slash payouts; `IAttributable` as the marker for `bytes32 builder` attribution that travels with subscribe, attestDegradation, arbiterRule, and bounty events. Other deployments of Daman Protocol can adopt the same substrate interfaces and remain interoperable with consumer products written against the substrate.
+
 ## Circle products composed through the protocol
 
 The storefront and the contract surface compose the Circle stack through real SDK calls, not through asset-name strings:
