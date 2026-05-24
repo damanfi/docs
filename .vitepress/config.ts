@@ -21,6 +21,7 @@ export default defineConfig({
         text: 'Start',
         items: [
           { text: 'Overview', link: '/' },
+          { text: 'Participate', link: '/PARTICIPATE' },
           { text: 'Architecture decision record 001', link: '/ADR-001' },
         ],
       },
