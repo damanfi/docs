@@ -65,6 +65,12 @@ Slash cap: 25% of currently-posted bond per dispute. Lockup: leader-determined p
 
 Daman declares conformance to substrate interfaces published in `reverbprotocol/protocol`. Six surfaces are consumed at the substrate layer: `IBountyAccrual` for routing a slice of slashed bond to the watchdog that filed the upheld claim; `IReputationRegistry` for cumulative scoring per agent address; `ICCTPReceiver` for CCTP v2 burn-and-mint reception; `IBondYieldVault` for USYC Teller routing on idle bond capital; `IStableFXSwap` for atomic StableFX EURC-to-USDC settlement on slash payouts; `IAttributable` as the marker for `bytes32 builder` attribution that travels with subscribe, attestDegradation, arbiterRule, and bounty events. Other deployments of Daman Protocol can adopt the same substrate interfaces and remain interoperable with consumer products written against the substrate.
 
+HumdRegistry is the immutable trust anchor for Daman's hum subnet. The registry's identity layer never changes; extensions compose sideways. Daman's `ReputationRegistry` and `BountyAccrual` are sidecars keyed by the same address space as HumdRegistry but stored separately and upgradeable on their own. The base registry never moves; sidecars iterate independently. Pattern documented at `github.com/adiled/hum/issues/39`.
+
+## Security posture
+
+Every Daman contract deployed via UUPS proxy is owned by a `TimelockController`; the Timelock's only proposer + executor is a 3-of-5 Safe multisig. Upgrades require Safe signatures plus a 24-hour testnet delay (72-hour mainnet) during which the queued bytecode is visible on-chain and any signer can call `cancel`. `Pausable` guards the human-facing write surfaces (registerLeader, postBond, subscribe, recordTrade, withdrawBond); agent flows (attestDegradation, arbiterRule) stay unblocked during pause so the AI agent economy continues settling in-flight disputes. Reentrancy guards plus SafeERC20 plus CEI ordering on every external state-changing function. Selector + event topic freeze tests run in CI; storage layout validation runs in CI; Slither high-severity findings block merge. Full upgrade authority and signer roster documented in `damanfi/copy-bond/docs/UPGRADE_AUTHORITY.md`.
+
 ## Circle products composed through the protocol
 
 The storefront and the contract surface compose the Circle stack through real SDK calls, not through asset-name strings:
