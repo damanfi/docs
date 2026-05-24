@@ -6,6 +6,7 @@ export default defineConfig({
   base: '/docs/',
   cleanUrls: true,
   appearance: 'dark',
+  srcExclude: ['README.md', '**/.*.md', 'launch/**', 'internal/**'],
   head: [
     ['link', { rel: 'icon', href: '/docs/favicon.svg', type: 'image/svg+xml' }],
     ['meta', { name: 'theme-color', content: '#ffb300' }],
@@ -27,13 +28,6 @@ export default defineConfig({
         text: 'Reference',
         items: [
           { text: 'Citations', link: '/CITATIONS' },
-        ],
-      },
-      {
-        text: 'Launch materials',
-        items: [
-          { text: 'Submission video script', link: '/SUBMISSION_VIDEO' },
-          { text: 'Launch post', link: '/LAUNCH_POST' },
         ],
       },
     ],
