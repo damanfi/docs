@@ -1,0 +1,30 @@
+:root.dark {
+  --vp-c-brand-1: #ffb300;
+  --vp-c-brand-2: #d49100;
+  --vp-c-brand-3: #b87b00;
+  --vp-c-brand-soft: rgba(255, 179, 0, 0.14);
+  --vp-c-bg: #0e0e10;
+  --vp-c-bg-alt: #161620;
+  --vp-c-bg-elv: #1a1a26;
+  --vp-c-divider: #2a2a36;
+}
+
+:root.dark .VPNavBar.has-sidebar .content {
+  background-color: var(--vp-c-bg);
+}
+
+:root.dark .VPHero .name,
+:root.dark .VPHero .text {
+  color: var(--vp-c-brand-1);
+}
+
+:root.dark .VPButton.brand {
+  border-color: var(--vp-c-brand-1);
+  background-color: var(--vp-c-brand-1);
+  color: var(--vp-c-bg);
+}
+
+:root.dark .VPButton.brand:hover {
+  border-color: var(--vp-c-brand-2);
+  background-color: var(--vp-c-brand-2);
+}

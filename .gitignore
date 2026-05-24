@@ -7,3 +7,8 @@
 
 # system
 .DS_Store
+
+# vitepress
+node_modules/
+.vitepress/dist/
+.vitepress/cache/
